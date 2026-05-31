@@ -43,3 +43,35 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+env/
+.env
+.venv
+ENV/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# IDE Specific (optional but recommended)
+.vscode/
+.idea/

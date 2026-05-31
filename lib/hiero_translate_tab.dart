@@ -34,7 +34,7 @@ class _HieroTranslateTabState extends State<HieroTranslateTab> {
     setState(() => _isLoading = true);
 
     try {
-      final uri = Uri.parse("https://0af2b6f2c0a6.ngrok-free.app/predict");
+      final uri = Uri.parse("http://10.0.2.2:5000/predict");
       final request = http.MultipartRequest('POST', uri)
         ..files.add(await http.MultipartFile.fromPath('file', image.path));
 

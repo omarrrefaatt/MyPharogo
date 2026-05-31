@@ -1,0 +1,208 @@
+## Professional Project Description
+
+**Project name:** `finalproject`  
+**App title:** Ancient Egyptian Monuments / MyPharogo  
+
+This Flutter application is a rich educational experience centered on ancient Egyptian history, monuments, and hieroglyphic culture. It combines immersive storytelling, image-driven AI interaction, location-aware landmark exploration, and a polished theme system to deliver a museum-style mobile experience.
+
+---
+
+## Purpose & Vision
+
+This project is designed to:
+
+- educate users about iconic ancient Egyptian monuments,
+- provide interactive tours of historical landmarks,
+- translate hieroglyph images via a remote AI service,
+- enable conversational discovery through an AI tour guide chat interface,
+- support modern mobile UX with dark/light theming and polished UI design.
+
+It is built as a Flutter multi-platform app with mobile-first interactions and a strong visual identity inspired by Egyptian colors and artifacts.
+
+---
+
+## Core Features
+
+1. **Home Dashboard**
+   - Launches from home_page.dart
+   - Presents a welcome card with:
+     - themed introduction
+     - buttons to open the hieroglyph translator, history discovery chat, and monument detection flows
+   - Displays quick facts:
+     - number of monuments
+     - 5,000+ years of history
+     - 700+ hieroglyphs
+   - Highlights featured monuments and timeline content
+   - Includes an Egyptian-style floating action button for quick actions
+
+2. **Hieroglyph Translator**
+   - Implemented in hiero_translate_tab.dart
+   - Lets users:
+     - pick images from camera or gallery
+     - upload the image to a remote prediction API
+     - receive translation results from the API response
+   - Uses `image_picker` and `http`
+   - Shows loading state and handles errors gracefully
+
+3. **Discover History Chat**
+   - Implemented in gemini_chat_widget.dart and discover_history_tab.dart
+   - Provides a chat interface that:
+     - starts with a custom Egyptian museum-guide prompt
+     - sends user text and optional image input to Google Gemini API (`gemini-2.5-pro`)
+     - renders conversational messages with visual styling
+     - supports photo uploads for artifact analysis
+   - Uses:
+     - `http`
+     - `image_picker`
+     - `permission_handler`
+   - Includes image permission handling and fallback dialogs
+
+4. **Monument Detection & Exploration**
+   - Implemented in monument_detection_page.dart
+   - Allows users to:
+     - choose or capture a monument image
+     - upload the image to a remote monument detection API
+     - display the detected monument name
+     - fetch and show a Wikipedia summary for the detected landmark
+     - open the full Wikipedia page with `url_launcher`
+   - Includes animation effects and robust error handling
+   - Uses fallback logic when direct Wikipedia summary requests fail
+
+5. **Landmark Detail Navigation**
+   - Implemented in landmark_screen.dart
+   - Renders detailed monument pages with:
+     - title
+     - imagery
+     - description
+     - location card
+     - direct Google Maps integration via maps.dart
+   - Provides a polished detail view for each historic site
+
+---
+
+## Data Model & Content
+
+- landmarks_data.dart stores curated landmark metadata for 10 major Egyptian sites:
+  - Great Pyramid of Giza
+  - Great Sphinx of Giza
+  - Step Pyramid of Djoser
+  - Valley of the Kings
+  - Mortuary Temple of Hatshepsut
+  - Karnak Temple Complex
+  - Luxor Temple
+  - Abu Simbel Temples
+  - Temple of Philae
+  - Grand Egyptian Museum (GEM)
+- Each landmark entry includes:
+  - id
+  - name
+  - rich description
+  - geographic coordinates
+  - image asset path
+
+---
+
+## Theming & UI Architecture
+
+- main.dart
+  - Initializes the app with `ChangeNotifierProvider`
+  - Uses `ThemeProvider` from theme_providers.dart
+  - Supports runtime dark/light theme switching
+- app_theme.dart
+  - Defines custom light and dark theme data
+  - Uses Egyptian-inspired color palettes
+  - Configures typography, card styling, input decorations, and app bar themes
+- colors.dart
+  - Contains the app’s core palette:
+    - deep teal
+    - Egyptian red
+    - sand beige
+    - gold accents
+- styled_buttons.dart
+  - Provides reusable button styles:
+    - primary
+    - secondary
+    - gold accent
+    - text button
+    - floating action button
+    - theme toggle
+- theme_providers.dart
+  - Uses `shared_preferences`
+  - Persists theme choice across app restarts
+  - Offers `toggleTheme`, `setLightTheme`, `setDarkTheme`, and `setSystemTheme`
+
+---
+
+## Navigation & Flow
+
+- tabs_screen.dart
+  - Provides a tabbed interface with:
+    - `HieroTranslateTab`
+    - `DiscoverHistoryTab`
+  - Uses `DefaultTabController` for smooth tab navigation
+- Home screen buttons route users to:
+  - translation tab
+  - history discovery chat tab
+  - monument detection page
+
+---
+
+## External Integrations
+
+- **Remote AI endpoints**
+  - Hieroglyph translation: `https://0af2b6f2c0a6.ngrok-free.app/predict`
+  - Monument detection: `https://082a4bafd8fe.ngrok-free.app/predict`
+- **Google Gemini**
+  - Uses `generativelanguage.googleapis.com`
+  - Enables conversational responses and artifact image analysis
+- **Wikipedia API**
+  - Retrieves monument summaries and public reference content
+- **Google Maps / Apple Maps**
+  - Opens locations externally for real-world landmark navigation
+
+---
+
+## Tech Stack & Dependencies
+
+- Flutter SDK
+- Dart 3.7 compatible
+- Key packages:
+  - `provider` for state management
+  - `shared_preferences` for theme persistence
+  - `http` for REST API communication
+  - `image_picker` for camera/gallery image capture
+  - `permission_handler` for runtime permissions
+  - `url_launcher` for external links
+- Platform support:
+  - Android
+  - iOS
+  - macOS / Windows / Linux scaffolding present via Flutter standard project structure
+
+---
+
+## Visual & UX Design
+
+- Uses Egyptian-themed gradients, typography, and iconography
+- Employs smooth animations and polished layout cards
+- Includes:
+  - scrollable dashboards
+  - responsive chat UI
+  - image preview cards
+  - clear loading states and snackbars
+- Prioritizes accessible information presentation and friendly guidance
+
+---
+
+## Summary
+
+This application is a complete, polished educational travel companion for ancient Egyptian culture. It blends:
+
+- curated monument content,
+- AI-assisted hieroglyph translation,
+- conversational discovery,
+- monument recognition,
+- guided landmark exploration,
+- theme persistence,
+- and multi-screen navigation.
+
+The implementation showcases a production-style Flutter architecture with reusable styling, state management, asset-driven content, external API integration, and a strong historical narrative focus.
