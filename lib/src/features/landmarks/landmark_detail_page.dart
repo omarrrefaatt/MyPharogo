@@ -1,5 +1,5 @@
-import 'package:finalproject/helpers/maps.dart';
 import 'package:flutter/material.dart';
+import 'package:finalproject/src/utils/maps.dart';
 
 class LandmarkDetailPage extends StatelessWidget {
   final Map<String, dynamic> landmark;

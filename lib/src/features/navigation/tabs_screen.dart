@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'hiero_translate_tab.dart';
-import 'discover_history_tab.dart';
+import '../translate/hiero_translate_tab.dart';
+import '../history/discover_history_tab.dart';
 
 class TabsScreen extends StatelessWidget {
   final int initialTabIndex;
@@ -10,22 +10,16 @@ class TabsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      initialIndex: initialTabIndex,  // <-- Use initialTabIndex here
+      initialIndex: initialTabIndex, // <-- Use initialTabIndex here
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Ancient Egypt Explorer'),
           bottom: const TabBar(
-            tabs: [
-              Tab(text: 'Hiero-translate'),
-              Tab(text: 'Discover history'),
-            ],
+            tabs: [Tab(text: 'Hiero-translate'), Tab(text: 'Discover history')],
           ),
         ),
         body: const TabBarView(
-          children: [
-            HieroTranslateTab(),
-            DiscoverHistoryTab(),
-          ],
+          children: [HieroTranslateTab(), DiscoverHistoryTab()],
         ),
       ),
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'gemini_chat_widget.dart';
+import '../chat/gemini_chat_widget.dart';
 
 class DiscoverHistoryTab extends StatelessWidget {
   const DiscoverHistoryTab({super.key});

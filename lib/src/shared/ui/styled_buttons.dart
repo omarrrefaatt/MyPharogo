@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'colors.dart';
+import '../theme/colors.dart';
 
 class StyledButtons {
   // Primary Egyptian Button

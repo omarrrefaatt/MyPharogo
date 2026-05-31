@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:finalproject/shared/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:finalproject/src/shared/theme/colors.dart';
+import 'package:finalproject/src/shared/ui/image_source_sheet.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'ChatMessage.dart';
+import 'chat_message.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class GeminiChatWidget extends StatefulWidget {
   const GeminiChatWidget({super.key});
@@ -25,7 +27,7 @@ class _GeminiChatWidgetState extends State<GeminiChatWidget>
   final ImagePicker _imagePicker = ImagePicker();
   bool _isLoading = false;
 
-  final String apiKey = 'AIzaSyC_dxECkqG4K_bAOpeGcVbBpbRE181NnPo';
+  String? get apiKey => dotenv.env['GEMINI_API_KEY'];
   String assistantPrompt =
       "You are a virtual Egyptian museum tour guide inside a mobile app. You speak with warmth, pride, and deep knowledge about ancient Egyptian history, pharaohs, gods, pyramids, and artifacts. Your tone is friendly, educational, and enthusiastic—like a real guide walking visitors through the wonders of Egypt. Use simple but captivating language, include cultural expressions like Ahlan wa sahlan! or You won't believe what happened next!, and tell short stories from ancient dynasties, temples, and legends. "
       "You should: "
@@ -85,120 +87,12 @@ class _GeminiChatWidgetState extends State<GeminiChatWidget>
   }
 
   Future<void> _showImageSourceDialog() async {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (BuildContext context) {
-        return Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          ),
-          child: SafeArea(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 8),
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Share an Egyptian Artifact! 🏺',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: darkBlue,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        'Take a photo or choose from gallery to learn more about Egyptian artifacts',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: darkBlue.withOpacity(0.7),
-                          fontSize: 14,
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: _buildImageSourceButton(
-                              icon: Icons.camera_alt,
-                              label: 'Camera',
-                              onTap: () => _pickImage(ImageSource.camera),
-                            ),
-                          ),
-                          SizedBox(width: 16),
-                          Expanded(
-                            child: _buildImageSourceButton(
-                              icon: Icons.photo_library,
-                              label: 'Gallery',
-                              onTap: () => _pickImage(ImageSource.gallery),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildImageSourceButton({
-    required IconData icon,
-    required String label,
-    required VoidCallback onTap,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [primaryGold, primaryGold.withOpacity(0.8)],
-          ),
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: primaryGold.withOpacity(0.3),
-              blurRadius: 8,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Column(
-          children: [
-            Icon(icon, color: darkBlue, size: 32),
-            SizedBox(height: 8),
-            Text(
-              label,
-              style: TextStyle(
-                color: darkBlue,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
-            ),
-          ],
-        ),
-      ),
+    await showImageSourceSheet(
+      context,
+      title: 'Share an Egyptian Artifact! 🏺',
+      subtitle:
+          'Take a photo or choose from gallery to learn more about Egyptian artifacts.',
+      onImageSelected: (source) => _pickImage(source),
     );
   }
 
@@ -303,7 +197,7 @@ class _GeminiChatWidgetState extends State<GeminiChatWidget>
     _scrollToBottom();
 
     final url = Uri.parse(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=$apiKey',
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$apiKey',
     );
 
     // Prepare the request with image
@@ -338,6 +232,10 @@ class _GeminiChatWidgetState extends State<GeminiChatWidget>
       setState(() {
         _isLoading = false;
       });
+
+      print("Status: ${response.statusCode}");
+      print("Body: ${response.body}");
+      print("url: $url");
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
@@ -391,7 +289,7 @@ class _GeminiChatWidgetState extends State<GeminiChatWidget>
     _scrollToBottom();
 
     final url = Uri.parse(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=$apiKey',
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$apiKey',
     );
 
     final List<Map<String, dynamic>> history =
@@ -414,7 +312,9 @@ class _GeminiChatWidgetState extends State<GeminiChatWidget>
       setState(() {
         _isLoading = false;
       });
-
+      print("url: $url , apiKey: $apiKey");
+      print("Status: ${response.statusCode}");
+      print("Body: ${response.body}");
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         final reply = data["candidates"]?[0]?["content"]?["parts"]?[0]?["text"];
