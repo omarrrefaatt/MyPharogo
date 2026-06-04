@@ -1,203 +1,285 @@
-# Ancient Egyptian Monuments
+# 𓂀 My Pharogo
 
-A polished Flutter application for exploring Egypt's landmark heritage, translating hieroglyphs, and interacting with rich monument content.
+> A multi-platform Flutter application for Egyptian cultural tourism, monument discovery, and AI-powered hieroglyph recognition.
 
-## Table of Contents
+<p align="center">
+  <img src="assets/images/pyramids.jpg" alt="Ancient Egyptian Monuments App" width="100%">
+</p>
 
-- [Overview](#overview)
-- [Key Features](#key-features)
-- [Architecture](#architecture)
-- [Repository Structure](#repository-structure)
-- [Dependencies](#dependencies)
-- [Environment Setup](#environment-setup)
-- [Running the App](#running-the-app)
-- [Backend Service](#backend-service)
-- [Asset & Theme Notes](#asset--theme-notes)
-- [Development Workflow](#development-workflow)
-- [Contributing](#contributing)
-- [License](#license)
+<p align="center">
+  <img alt="Flutter" src="https://img.shields.io/badge/Flutter-3.x-02569B?style=flat-square&logo=flutter&logoColor=white">
+  <img alt="Python" src="https://img.shields.io/badge/Python-3.x-3776AB?style=flat-square&logo=python&logoColor=white">
+  <img alt="TensorFlow" src="https://img.shields.io/badge/TensorFlow-FF6F00?style=flat-square&logo=tensorflow&logoColor=white">
+  <img alt="Flask" src="https://img.shields.io/badge/Flask-000000?style=flat-square&logo=flask&logoColor=white">
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-green?style=flat-square">
+</p>
 
-## Overview
+---
 
-`Ancient Egyptian Monuments` is a cross-platform Flutter experience designed to showcase iconic Egyptian sites, provide visitor guidance, and support hieroglyph image translation through a lightweight backend service.
+## ✨ Features
 
-The app blends:
+- **Monument Discovery** — Explore 10 iconic Egyptian landmarks with rich educational content and direct map integration
+- **Hieroglyph Scanner** — Upload or photograph hieroglyphs and get AI-powered translations via a local Python backend
+- **Egyptian Design System** — A fully custom light/dark theme with an authentic palette (Pharaoh Gold · Papyrus · Obsidian · Amber)
+- **Historical Timeline** — Curated timeline of major Egyptian civilizational periods
+- **Cross-Platform** — Runs on Android, iOS, Web, Windows, macOS, and Linux
 
-- a curated monument discovery experience,
-- interactive timelines and travel tips,
-- a hieroglyph scanning workflow powered by a local Flask prediction API,
-- theming support for light and dark modes.
+---
 
-## Key Features
+## 📸 App Overview
 
-- **Featured Monuments**: browse a selectable list of landmark cards with detail navigation.
-- **Visitor Tips**: travel and preparation guidance for site visits.
-- **Historical Timeline**: learn major Egyptian eras with clean timeline cards.
-- **Hieroglyph Scanner**: capture or select an image and send it to the backend for symbol recognition.
-- **AR Scan Shortcut**: quick access to monument scanning functionality.
-- **Theme Toggle**: switch between light and dark appearance.
+| Home Dashboard                                                  | Hieroglyph Scanner                                          | Landmark Detail                                         |
+| --------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------- |
+| Hero section, quick actions, statistics, and featured monuments | Camera/gallery image selection with live prediction results | Full-width imagery, map launch, and descriptive content |
 
-## Architecture
+---
 
-The project is organized as a two-part system:
+## 🏗️ Architecture
 
-1. **Flutter Frontend** (`lib/`)
-   - `lib/main.dart` bootstraps the app.
-   - `lib/src/app.dart` defines the root `MaterialApp` with theme management.
-   - `lib/src/features/` contains feature modules such as `home`, `translate`, `history`, `landmarks`, and `monuments`.
-   - `lib/src/shared/` contains reusable theming, colors, and UI utilities.
+The project is divided into two main components:
 
-2. **Python Backend** (`backend/`)
-   - `backend/app.py` implements a Flask service exposing a `/predict` endpoint.
-   - The backend loads a pre-trained Keras model from `backend/models/hieromodel/hiero_model.h5` and class labels from `backend/models/hieromodel/labels.json`.
+```
+finalproject/
+├── lib/                        # Flutter frontend
+│   ├── main.dart               # App entrypoint
+│   ├── src/
+│   │   ├── app.dart            # Root MaterialApp + theme wiring
+│   │   ├── features/
+│   │   │   ├── home/           # Dashboard UI
+│   │   │   ├── landmarks/      # Monument data + detail pages
+│   │   │   ├── translate/      # Hieroglyph scanner tab
+│   │   │   ├── navigation/     # Tab navigation shell
+│   │   │   ├── monuments/      # Monument detection stub
+│   │   │   ├── chat/           # Chat feature module
+│   │   │   └── history/        # History feature module
+│   │   └── utils/
+│   │       └── maps.dart       # Multi-platform map launcher
+│   └── shared/
+│       ├── theme/              # AppTheme, ThemeProvider, colors
+│       └── utils/              # Landmark icon mapping
+├── backend/                    # Python prediction service
+│   ├── app.py                  # Flask API server
+│   ├── requirements.txt        # Python dependencies
+│   └── models/hieromodel/
+│       ├── hiero_model.h5      # Trained Keras model
+│       ├── labels.json         # Glyph class label map
+│       └── history.json        # Training history
+├── assets/
+│   ├── images/                 # Landmark photo assets
+│   └── fonts/                  # Cinzel + Lora typefaces
+└── pubspec.yaml
+```
 
-The Flutter frontend communicates with the backend at `http://10.0.2.2:5000/predict` when running against an Android emulator.
+---
 
-## Repository Structure
-
-- `lib/`
-  - `main.dart` — Flutter entrypoint.
-  - `src/app.dart` — app shell, theme provider registration.
-  - `src/features/` — feature modules for home, chat, history, translate, landmarks, and monuments.
-  - `src/shared/` — shared theme, UI components, utilities.
-- `assets/` — application images and fonts.
-- `backend/` — Flask prediction service and model artifacts.
-- `pubspec.yaml` — Flutter dependencies and asset configuration.
-
-## Dependencies
-
-### Flutter Dependencies
-
-- `flutter`
-- `cupertino_icons`
-- `http`
-- `shared_preferences`
-- `provider`
-- `url_launcher`
-- `image_picker`
-- `permission_handler`
-- `flutter_dotenv`
-
-### Backend Dependencies
-
-- `Flask`
-- `tensorflow`
-- `keras`
-- `numpy`
-- `Pillow`
-
-## Environment Setup
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Flutter SDK compatible with Dart `^3.7.0`
-- Python 3.10+ for backend service
-- Android Studio or Xcode for mobile device/emulator support
-- A device or emulator configured for Flutter deployment
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) (3.x or later)
+- [Python 3.x](https://www.python.org/downloads/)
+- [Android Studio](https://developer.android.com/studio) or Xcode (for mobile targets)
 
-### Flutter Setup
+---
 
-1. Open the repository root.
-2. Install Flutter dependencies:
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/ancient-egyptian-monuments.git
+cd ancient-egyptian-monuments
+```
+
+### 2. Configure Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+# Add any runtime configuration values here
+```
+
+### 3. Install Flutter Dependencies
 
 ```bash
 flutter pub get
 ```
 
-3. Ensure `.env` is available in the project root. The app loads environment values from this file using `flutter_dotenv`.
-
-### Backend Setup
-
-1. Change directory to the backend folder:
+### 4. Set Up the Python Backend
 
 ```bash
 cd backend
-```
-
-2. Create and activate a Python virtual environment (recommended):
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-3. Install backend dependencies:
-
-```bash
 pip install -r requirements.txt
-```
-
-4. Confirm the model and labels exist at:
-
-- `backend/models/hieromodel/hiero_model.h5`
-- `backend/models/hieromodel/labels.json`
-
-## Running the App
-
-### Start the Backend Service
-
-From `backend/`:
-
-```bash
 python app.py
 ```
 
-The Flask API listens on `http://127.0.0.1:5000` by default.
+The Flask server will start at `http://localhost:5000`.
 
-### Launch the Flutter App
+> **Note for Android Emulator:** The app currently targets `http://10.0.2.2:5000/predict` as the backend URL, which maps to `localhost` from within the emulator.
 
-From the repository root:
+### 5. Run the Flutter App
 
 ```bash
 flutter run
 ```
 
-> Note: When using an Android emulator, the frontend connects to the backend using `http://10.0.2.2:5000/predict`.
+---
 
-If you run on a physical device or a non-Android platform, update the API host accordingly so the device can reach the backend service.
+## 🔌 Backend API
 
-## Backend Service
+The prediction service exposes a single endpoint:
 
-The Python backend is purpose-built for hieroglyph recognition:
+**`POST /predict`**
 
-- Receives an uploaded image via multipart form data.
-- Resizes input images to `224x224` and normalizes pixels.
-- Predicts the class label with the loaded Keras model.
-- Returns a JSON response with `class` and `confidence`.
+| Field        | Value                 |
+| ------------ | --------------------- |
+| Content-Type | `multipart/form-data` |
+| Field name   | `file`                |
+| Payload      | Image file (JPEG/PNG) |
 
-### Important Backend Notes
+**Response:**
 
-- The model is loaded once when the Flask app starts.
-- The endpoint is defined at `POST /predict`.
-- The current frontend expects the response field `class` and uses the numeric prediction confidence.
+```json
+{
+  "class": "ankh",
+  "confidence": 0.9823
+}
+```
 
-## Asset & Theme Notes
+**Processing pipeline:**
 
-- Custom fonts are defined in `pubspec.yaml`:
-  - `Cinzel`
-  - `Lora`
-- Image assets are declared in `pubspec.yaml` and stored under `assets/images/`.
-- The app includes a dark theme and a light theme managed by `ThemeProvider`.
+1. Receive image file via multipart form
+2. Resize to `224×224` and normalize pixel values
+3. Expand dims to `(1, 224, 224, 3)`
+4. Run `model.predict(...)` using the trained Keras model
+5. Return the highest-scoring label and its confidence score
 
-## Development Workflow
+---
 
-- Use `flutter pub get` after modifying `pubspec.yaml`.
-- Keep `backend/app.py` running while testing the hieroglyph scanning feature.
-- For UI work, open `lib/src/features/home/home_page.dart` and `lib/src/features/translate/hiero_translate_tab.dart`.
-- Use `flutter analyze` to catch static issues and `flutter test` for any widget/unit tests you add.
+## 🗺️ Landmarks
 
-## Contributing
+The app includes curated content for 10 major Egyptian monuments:
 
-Contributions are welcome. When adding new features:
+| Monument                      | Location |
+| ----------------------------- | -------- |
+| Great Pyramid of Giza         | Giza     |
+| Great Sphinx of Giza          | Giza     |
+| Step Pyramid of Djoser        | Saqqara  |
+| Valley of the Kings           | Luxor    |
+| Mortuary Temple of Hatshepsut | Luxor    |
+| Karnak Temple Complex         | Karnak   |
+| Luxor Temple                  | Luxor    |
+| Abu Simbel Temples            | Aswan    |
+| Temple of Philae              | Aswan    |
+| Grand Egyptian Museum         | Giza     |
 
-1. Keep UI styles consistent with the existing Egyptian heritage theme.
-2. Add assets to `pubspec.yaml` and `assets/images/`.
-3. Document new routes, API changes, or environment requirements in this README.
+Each landmark includes a name, description, coordinates, and a direct link to open it in Google Maps (with Apple Maps and web fallback).
 
-## License
+---
 
-This repository does not currently specify a license. Add a `LICENSE` file if you want to define reuse terms.
+## 🎨 Design System
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The app uses an Egyptian-inspired visual language across both light and dark modes:
+
+| Token      | Light Mode          | Dark Mode            |
+| ---------- | ------------------- | -------------------- |
+| Primary    | Pharaoh Gold        | Ancient Amber        |
+| Background | Papyrus / Sandstone | Obsidian / Dark Tomb |
+| Text       | Kohl Black          | Warm White           |
+| Accent     | Desert Sand         | Ember Orange         |
+
+**Typography:** `Cinzel` (headings & branding) · `Lora` (body text)
+
+Theme selection persists across sessions via `SharedPreferences` and supports `light`, `dark`, and `system` modes.
+
+---
+
+## 🧩 Extending the Project
+
+### Add a New Landmark
+
+1. Place the image under `assets/images/`
+2. Register it in `pubspec.yaml` under `flutter.assets`
+3. Add an entry to `lib/src/features/landmarks/landmarks_data.dart`
+
+### Add a New Hieroglyph Class
+
+1. Retrain or expand the model with new class data
+2. Update `backend/models/hieromodel/labels.json`
+3. Replace `backend/models/hieromodel/hiero_model.h5` with the new artifact
+
+### Add a New Tab
+
+1. Create a widget in `lib/src/features/`
+2. Add it to `TabsScreen._tabs`
+3. Register it in `TabBarView`
+
+---
+
+## ✅ Running Checks
+
+```bash
+# Static analysis
+flutter analyze
+
+# Run all tests
+flutter test
+
+# Start the backend server
+cd backend && python app.py
+```
+
+---
+
+## ⚠️ Known Limitations
+
+- Backend URL is hardcoded for Android emulator (`10.0.2.2:5000`) — configurable via `.env` in a future update
+- The Flask service is for local development only and is not production-hardened
+- Model artifact paths in `backend/app.py` may require adjustment for different environments
+- No frontend error handling for missing model artifacts
+
+---
+
+## 🛣️ Roadmap
+
+- [ ] Make backend URL configurable via environment variables
+- [ ] Add authentication to the prediction API
+- [ ] Expand hieroglyph model to support additional glyph classes
+- [ ] Add user interaction analytics
+- [ ] Harden Flask backend for production deployment
+- [ ] Implement full monument AR scanning feature
+
+---
+
+## 📦 Dependencies
+
+**Flutter**
+
+| Package              | Purpose                      |
+| -------------------- | ---------------------------- |
+| `provider`           | State management             |
+| `shared_preferences` | Theme persistence            |
+| `http`               | Backend API communication    |
+| `image_picker`       | Camera & gallery access      |
+| `url_launcher`       | Map deep linking             |
+| `permission_handler` | Runtime permission requests  |
+| `flutter_dotenv`     | Environment variable loading |
+
+**Python**
+
+| Package                | Purpose             |
+| ---------------------- | ------------------- |
+| `flask`                | HTTP API server     |
+| `tensorflow` / `keras` | Model inference     |
+| `numpy`                | Array manipulation  |
+| `Pillow`               | Image preprocessing |
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
+---
+
+<p align="center">
+  Built with 🏺 and Flutter · Powered by TensorFlow · Inspired by 5,000 years of history
+</p>
