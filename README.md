@@ -85,8 +85,8 @@ finalproject/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/ancient-egyptian-monuments.git
-cd ancient-egyptian-monuments
+git clone https://github.com/omarrrefaatt/MyPharogo.git
+cd final project
 ```
 
 ### 2. Configure Environment Variables
