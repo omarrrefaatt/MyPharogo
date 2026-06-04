@@ -40,7 +40,10 @@ class LandmarkDetailPage extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.location_on, color: Colors.redAccent),
+                    Icon(
+                      Icons.location_on,
+                      color: Theme.of(context).colorScheme.error,
+                    ),
                     const SizedBox(width: 5),
                     Flexible(child: Text(landmark['location'])),
                     // const SizedBox(width: 3),
@@ -49,7 +52,7 @@ class LandmarkDetailPage extends StatelessWidget {
                       icon: Icon(
                         Icons.open_in_new,
                         size: 16,
-                        color: Colors.blue,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                   ],
@@ -71,7 +74,12 @@ class LandmarkDetailPage extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               'Swipe through nearby attractions, view 3D models, or read historical timelines.',
-              style: TextStyle(fontSize: 14, color: Colors.black54),
+              style: TextStyle(
+                fontSize: 14,
+                color: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.color?.withOpacity(0.85),
+              ),
             ),
             const SizedBox(height: 60),
           ],

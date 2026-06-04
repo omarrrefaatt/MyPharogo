@@ -109,7 +109,7 @@ A solar alignment on ~February 22 and October 22 floods the sanctuary’s st
 In the 1960s, the entire complex was relocated stone‑by‑stone to higher ground to avoid flooding by Lake Nasser following Aswan Dam construction.  
 Interior halls show battle scenes at Kadesh, Osirid pillars, and finely carved reliefs honoring both gods and the pharaoh.  
 ''',
-      'location': 'Abu Simbel, Aswan Governorate, Egypt',
+      'location': '',
       'latitude': 22.3372,
       'longitude': 31.6258,
       'imageUrl': 'assets/images/abusimbel.jpg',

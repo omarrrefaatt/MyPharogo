@@ -9,7 +9,7 @@ Future<void> showImageSourceSheet(
 }) {
   return showModalBottomSheet(
     context: context,
-    backgroundColor: Colors.transparent,
+    backgroundColor: Theme.of(context).colorScheme.background.withOpacity(0),
     builder: (BuildContext context) {
       return Container(
         decoration: BoxDecoration(
@@ -24,7 +24,7 @@ Future<void> showImageSourceSheet(
               height: 4,
               margin: const EdgeInsets.only(top: 12, bottom: 12),
               decoration: BoxDecoration(
-                color: Colors.grey.shade400,
+                color: Theme.of(context).dividerColor,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),

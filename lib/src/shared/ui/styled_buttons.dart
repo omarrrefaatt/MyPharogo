@@ -4,6 +4,7 @@ import '../theme/colors.dart';
 class StyledButtons {
   // Primary Egyptian Button
   static Widget primaryButton({
+    required BuildContext context,
     required String text,
     required VoidCallback onPressed,
     IconData? icon,
@@ -17,10 +18,10 @@ class StyledButtons {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.egyptianRed,
-          foregroundColor: AppColors.lightSand,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          foregroundColor: Theme.of(context).colorScheme.onPrimary,
           elevation: 3,
-          shadowColor: Colors.black26,
+          shadowColor: Theme.of(context).shadowColor.withOpacity(0.26),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
@@ -50,6 +51,7 @@ class StyledButtons {
 
   // Secondary Egyptian Button
   static Widget secondaryButton({
+    required BuildContext context,
     required String text,
     required VoidCallback onPressed,
     IconData? icon,
@@ -63,8 +65,11 @@ class StyledButtons {
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          foregroundColor: AppColors.deepTeal,
-          side: const BorderSide(color: AppColors.deepTeal, width: 2),
+          foregroundColor: Theme.of(context).colorScheme.secondary,
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.secondary,
+            width: 2,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
@@ -94,6 +99,7 @@ class StyledButtons {
 
   // Gold Accent Button
   static Widget goldButton({
+    required BuildContext context,
     required String text,
     required VoidCallback onPressed,
     IconData? icon,
@@ -107,10 +113,10 @@ class StyledButtons {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.goldSand,
-          foregroundColor: AppColors.deepTeal,
+          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+          foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
           elevation: 3,
-          shadowColor: Colors.black26,
+          shadowColor: Theme.of(context).shadowColor.withOpacity(0.26),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
@@ -140,6 +146,7 @@ class StyledButtons {
 
   // Flat Text Button
   static Widget textButton({
+    required BuildContext context,
     required String text,
     required VoidCallback onPressed,
     IconData? icon,
@@ -149,7 +156,7 @@ class StyledButtons {
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        foregroundColor: color ?? AppColors.egyptianRed,
+        foregroundColor: color ?? Theme.of(context).colorScheme.primary,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
       child: Row(
@@ -171,6 +178,7 @@ class StyledButtons {
 
   // Floating Action Button Egyptian Style
   static Widget egyptianFab({
+    required BuildContext context,
     required VoidCallback onPressed,
     required IconData icon,
     String? tooltip,
@@ -180,8 +188,8 @@ class StyledButtons {
     if (isExtended && label != null) {
       return FloatingActionButton.extended(
         onPressed: onPressed,
-        backgroundColor: AppColors.egyptianRed,
-        foregroundColor: AppColors.lightSand,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
         elevation: 6,
         tooltip: tooltip,
         icon: Icon(icon),
@@ -197,8 +205,8 @@ class StyledButtons {
 
     return FloatingActionButton(
       onPressed: onPressed,
-      backgroundColor: AppColors.egyptianRed,
-      foregroundColor: AppColors.lightSand,
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      foregroundColor: Theme.of(context).colorScheme.onPrimary,
       elevation: 6,
       tooltip: tooltip,
       child: Icon(icon),
@@ -207,6 +215,7 @@ class StyledButtons {
 
   // Icon Button Egyptian Style
   static Widget iconButton({
+    required BuildContext context,
     required VoidCallback onPressed,
     required IconData icon,
     Color? color,
@@ -217,7 +226,7 @@ class StyledButtons {
     return IconButton(
       onPressed: onPressed,
       icon: Icon(icon),
-      color: color ?? AppColors.deepTeal,
+      color: color ?? Theme.of(context).colorScheme.primary,
       iconSize: size,
       tooltip: tooltip,
       padding: padding,
@@ -226,6 +235,7 @@ class StyledButtons {
 
   // Toggle Button for Dark/Light Mode
   static Widget themeToggleButton({
+    required BuildContext context,
     required bool isDark,
     required VoidCallback onPressed,
     double size = 40,
@@ -234,10 +244,13 @@ class StyledButtons {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkSurface : AppColors.lightSurface,
+        color:
+            isDark
+                ? Theme.of(context).colorScheme.surfaceVariant
+                : Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(size / 2),
         border: Border.all(
-          color: isDark ? AppColors.goldSand : AppColors.deepTeal,
+          color: Theme.of(context).colorScheme.primary,
           width: 2,
         ),
       ),
@@ -247,7 +260,7 @@ class StyledButtons {
           isDark ? Icons.light_mode : Icons.dark_mode,
           size: size * 0.6,
         ),
-        color: isDark ? AppColors.goldSand : AppColors.deepTeal,
+        color: Theme.of(context).colorScheme.primary,
         padding: EdgeInsets.zero,
       ),
     );
@@ -255,6 +268,7 @@ class StyledButtons {
 
   // Card Action Button
   static Widget cardActionButton({
+    required BuildContext context,
     required String text,
     required VoidCallback onPressed,
     IconData? icon,
@@ -266,8 +280,8 @@ class StyledButtons {
         icon: Icon(icon ?? Icons.arrow_forward, size: 16),
         label: Text(text),
         style: OutlinedButton.styleFrom(
-          foregroundColor: AppColors.egyptianRed,
-          side: const BorderSide(color: AppColors.egyptianRed),
+          foregroundColor: Theme.of(context).colorScheme.primary,
+          side: BorderSide(color: Theme.of(context).colorScheme.primary),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         ),
@@ -279,8 +293,8 @@ class StyledButtons {
       icon: Icon(icon ?? Icons.arrow_forward, size: 16),
       label: Text(text),
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.egyptianRed,
-        foregroundColor: AppColors.lightSand,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        foregroundColor: Theme.of(context).colorScheme.onPrimary,
         elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -290,6 +304,7 @@ class StyledButtons {
 
   // Chip Button
   static Widget chipButton({
+    required BuildContext context,
     required String text,
     required VoidCallback onPressed,
     bool isSelected = false,
@@ -300,17 +315,23 @@ class StyledButtons {
       onSelected: (_) => onPressed(),
       label: Text(text),
       avatar: icon != null ? Icon(icon, size: 16) : null,
-      backgroundColor: AppColors.lightSurface,
-      selectedColor: AppColors.goldSand,
-      checkmarkColor: AppColors.deepTeal,
+      backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+      selectedColor: Theme.of(context).colorScheme.primary,
+      checkmarkColor: Theme.of(context).colorScheme.onPrimary,
       labelStyle: TextStyle(
-        color: isSelected ? AppColors.deepTeal : AppColors.textSecondaryLight,
+        color:
+            isSelected
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.onSurfaceVariant,
         fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
         side: BorderSide(
-          color: isSelected ? AppColors.egyptianRed : AppColors.dividerLight,
+          color:
+              isSelected
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.outline,
         ),
       ),
     );

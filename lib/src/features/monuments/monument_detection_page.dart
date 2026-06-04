@@ -89,7 +89,7 @@ class _MonumentDetectionPageState extends State<MonumentDetectionPage>
       // Create multipart request
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('https://082a4bafd8fe.ngrok-free.app/predict'),
+        Uri.parse('https://6344-136-109-198-5.ngrok-free.app/predict'),
       );
 
       // Add image file
@@ -197,7 +197,7 @@ class _MonumentDetectionPageState extends State<MonumentDetectionPage>
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: Colors.red.shade600,
+        backgroundColor: Theme.of(context).colorScheme.error,
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -206,7 +206,7 @@ class _MonumentDetectionPageState extends State<MonumentDetectionPage>
   void _showImageSourceDialog() {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Theme.of(context).colorScheme.background.withOpacity(0),
       builder:
           (context) => Container(
             decoration: BoxDecoration(
@@ -223,7 +223,7 @@ class _MonumentDetectionPageState extends State<MonumentDetectionPage>
                   height: 4,
                   margin: const EdgeInsets.symmetric(vertical: 12),
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade400,
+                    color: Theme.of(context).dividerColor,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
